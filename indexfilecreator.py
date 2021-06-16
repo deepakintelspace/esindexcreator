@@ -25,8 +25,8 @@ def prepare_index_json(filename,indexname,jsonFilePath):
     processeddata =dict()
     duplicatedrecords = dict()
     print("duplicated records below")
-    for user in pdadata:
-        indexkey = user['artefact_meta_id']
+    for row in pdadata:
+        indexkey = row['id']
         indexline = {"index":{"_index":indexname,"_type":"_doc","_id":indexkey}}
         overalldata.append(indexline)
         if processeddata.get(indexkey) :
@@ -35,7 +35,7 @@ def prepare_index_json(filename,indexname,jsonFilePath):
         else : 
          processeddata[indexkey]=True
 
-        overalldata.append(user)
+        overalldata.append(row)
     if len(duplicatedrecords)==0 :
         print('none') 
     else:
@@ -48,7 +48,7 @@ def prepare_index_json(filename,indexname,jsonFilePath):
 
 
 if __name__ == '__main__':
-    prepare_index_json('rawartefact.json','widgetartefactindex_v1','converted-stage-all.json')
+    prepare_index_json('<json file path>','<es index>','coverted.json')
 
 
 
